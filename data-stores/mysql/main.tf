@@ -20,3 +20,4 @@ resource "aws_dynamodb_table" "rds-lock-table" {
     type = "S"
   }
 }
+#Hey there, this is just for testing git.
