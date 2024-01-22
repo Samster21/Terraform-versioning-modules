@@ -95,6 +95,16 @@ resource "aws_autoscaling_group" "asg-1" {
     value = "${var.asg_name}"
     propagate_at_launch = true
   }
+
+  dynamic "tag" {
+    for_each = toset(var.custom_tags)
+
+    content {
+      key = tag.key
+      value = tag.value
+      propagate_at_launch = true
+    }
+  }
 }
 
 

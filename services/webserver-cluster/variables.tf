@@ -23,3 +23,8 @@ variable "rds_db_remote" {
   description = "Enter the name and key of the .tfstate file for the rds db."
   type = list(string)
 }
+
+variable "custom_tags" {
+  type = map(string)
+  default = {}
+}
