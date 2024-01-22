@@ -108,6 +108,26 @@ resource "aws_autoscaling_group" "asg-1" {
 }
 
 
+resource "aws_autoscaling_schedule" "morning" {
+  count = var.enable_autoscaling ? 1 : 0
+  autoscaling_group_name = aws_autoscaling_group.asg-1.name
+  scheduled_action_name = "${var.asg_name}-morning-scale-out"
+  min_size = 1
+  max_size = 2 
+  desired_capacity = 2
+  recurrence = "0 9 * * *"
+}
+
+resource "aws_autoscaling_schedule" "evening" {
+  count = var.enable_autoscaling ? 1 : 0
+  scheduled_action_name = "${var.asg_name}-evening-scale-down"
+  autoscaling_group_name = aws_autoscaling_group.asg-1.name
+  min_size = 1
+  max_size = 2
+  desired_capacity = 1
+  recurrence = "0 17 * * *"
+}
+
 
 resource "aws_dynamodb_table" "asg-lock-db" {
   name = "${var.asg_db_name}"
