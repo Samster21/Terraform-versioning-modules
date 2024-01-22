@@ -73,8 +73,6 @@ resource "aws_launch_configuration" "lc_1" {
   security_groups = [aws_security_group.my.id]
   user_data = templatefile("/home/akira/DevOps-2/modules/services/webserver-cluster/userdata.sh", {
     server_port = local.custom_port
-    db_port = data.terraform_remote_state.rds_db.outputs.DDB_port
-    db_address = data.terraform_remote_state.rds_db.outputs.DDB_address
   })
   lifecycle {
     create_before_destroy = true
