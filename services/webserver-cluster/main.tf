@@ -97,7 +97,7 @@ resource "aws_autoscaling_group" "asg-1" {
   }
 
   dynamic "tag" {
-    for_each = toset(var.custom_tags)
+    for_each = var.custom_tags
 
     content {
       key = tag.key
