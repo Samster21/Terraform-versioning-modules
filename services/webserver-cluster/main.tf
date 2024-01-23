@@ -71,7 +71,7 @@ resource "aws_launch_configuration" "lc_1" {
   image_id = "ami-0c7217cdde317cfec"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.my.id]
-  user_data = templatefile("userdata.sh", {
+  user_data = templatefile("${path.module}/userdata.sh", {
     server_port = local.custom_port
     db_port= data.terraform_remote_state.rds_db.outputs.DDB_address
     db_address = data.terraform_remote_state.rds_db.outputs.DDB_port
